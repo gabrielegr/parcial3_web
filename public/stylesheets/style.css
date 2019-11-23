@@ -21,7 +21,10 @@ blockquote:before, blockquote:after, q:before, q:after {
   content: '';
   content: none;
 }
-
+td{
+  background-color: white;
+  color:black;
+}
 table {
   border-radius: 5px !important;
   border-collapse: collapse !important;
@@ -31,7 +34,11 @@ table {
   empty-cells: show;
   margin-right: auto;
 }
+.options{
+ 
+  display:flex;
 
+}
 th{
 background-color: mediumturquoise;
 }
@@ -105,6 +112,12 @@ a:hover, a:focus, a:active {
 .navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover {
   color: #fffde0;
   background-color: transparent;
+}
+
+.uwu{
+  margin-top:4px;
+  background-color: black;
+  margin-left:30px;
 }
 
 @media (max-width: 768px) {

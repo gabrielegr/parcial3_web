@@ -1,3 +1,5 @@
+
+const bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var debug = require('debug')('parcial3:database');
 var createError = require('http-errors');
@@ -30,8 +32,9 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(logger('dev'));
+app.use(bodyParser.json());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -44,7 +47,7 @@ app.use(sassMiddleware({
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-app.use('/users/', usersRouter);
+
 app.use('/', becaRouter);
 
 // catch 404 and forward to error handler
