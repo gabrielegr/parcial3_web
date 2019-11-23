@@ -66,7 +66,7 @@ a:hover, a:focus, a:active {
 
 
 .header {
-  background: url('/public/images/bg-banner03.jpg') no-repeat fixed;
+  background-image: url('../public/images/bg-banner03.jpg') no-repeat fixed;
   background-size: cover;
   min-height: 630px;
   position: relative;
@@ -117,8 +117,12 @@ a:hover, a:focus, a:active {
   background: rgba(50, 60, 70, 0.9);
 }
 
+body{
+  background-image:url("/images/grads.jpg")
+}
+
 .bg-color {
-  background-color: RGBA(0, 0, 0, 0.67);
+  background-image:url("/images/grads.jpg") no-repeat fixed;
   min-height: 650px;
 }
 
@@ -163,7 +167,7 @@ a:hover, a:focus, a:active {
 }
 
 #about {
-  background: url('/public/imgages/about-banner.jpg') no-repeat;
+  background-image: url('../public/imgages/about-banner.jpg') no-repeat;
   background-size: cover;
   margin-bottom: -3px;
 }
@@ -188,6 +192,7 @@ a:hover, a:focus, a:active {
 }
 
 .abt-list li {
+  color:black;
   padding: 5px 0px;
   font-size: 18px;
   font-weight: 400;
