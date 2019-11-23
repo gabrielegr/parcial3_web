@@ -66,7 +66,7 @@ module.exports.register = (req, res, next) => {
                     nombre: req.body.nombre,
                     fundacion: req.body.fundacion|| "",
                     tipo: req.body.tipo || "",
-                    descripcion: req.body.descripcion || " 
+                    descripcion: req.body.descripcion || ""
                 });
                 return newBeca.save();
             }

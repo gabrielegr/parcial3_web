@@ -26,15 +26,12 @@ table {
   border-radius: 5px !important;
   border-collapse: collapse !important;
   border: none !important;
-  width:75%;
+  width:100%;
   margin-left: auto;
+  empty-cells: show;
   margin-right: auto;
 }
-table th,
-table td {
-  border: none !important;
-  text-align: center;
-}
+
 th{
 background-color: mediumturquoise;
 }
@@ -55,6 +52,10 @@ table tr:hover td {
   background-color: #ddd !important
 }
 
+td{
+  border: 1px solid black;
+  min-height: 50px;
+}
 a {
   outline: none;
 }
@@ -129,7 +130,6 @@ body{
 .navbar-border {}
 
 .banner-text {
-  border-left: 5px solid #BE2525;
   padding: 15px 40px;
   color: #fff;
   margin-top: 170px;

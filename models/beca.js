@@ -2,10 +2,7 @@ const mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 var PostSchema = new Schema({
-    nombre: {
-        type: String,
-        required: true
-    },
+    nombre:String,
     fundacion:String,
     tipo:String,
     descripcion:String,
