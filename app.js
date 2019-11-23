@@ -1,3 +1,5 @@
+var mongoose = require('mongoose');
+var debug = require('debug')('parcial3:database');
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -7,6 +9,19 @@ var sassMiddleware = require('node-sass-middleware');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+
+mongoose.connect(process.env.MONGO_URI, {
+  useCreateIndex: true,
+  useNewUrlParser: true,
+  useUnifiedTopology: true 
+  })
+  .then(() => {
+    debug("success Connected to database")
+  })
+  .catch((err) => {
+    debug(err);
+    process.exit(1);
+  });
 
 var app = express();
 
