@@ -1,129 +1,138 @@
-var Beca = require("../models/beca");
-var debug = require("debug")("parcial3:post_controller");
+const Beca = require("../models/beca")
 
-module.exports.getOne = (req, res, next) => {
-  debug("Buscar Beca", req.params.nombre);
+/**
+ * METHOD = POST
+ * BODY:{
+ *      carnet:String,
+ *      schedule: String,
+ *      isLate: Boolean,
+ *      datetime: Date
+ * }
+ */
+const insert = (req, res)=>{
+    /**
+     * Para ver el funcionamiento de req.body hacer:
+     * console.log(req.body);
+     */
+    
+    let beca = new Beca(
+        req.body
+    );
 
-  Beca.findByNombre(req.params.nombre)
-    .then(post => {
-      debug("Resultado:", post);
-      if (post) return res.status(200).json(post);
-      else return res.status(400).json(null);
-    })
-    .catch(err => {
-      next(err);
-    });
-};
-
-module.exports.create = (req, res, next) => {
-  debug("Crear Beca");
-  Beca.findOne({
-    nombre: req.body.nombre
-  })
-    .then(Beca => {
-      if (!beca) {
-        throw new Error("La beca no existe");
-      } else {
-        let beca = new Beca({
-          nombre: req.body.nombre,
-          fundacion: req.body.fundacion,
-          tipo: req.body.tipo,
-          descripcion: req.body.descripcion
+    beca.save((err)=>{
+        if(err) return res.status(500).json({
+            message: "Something happend trying to insert beca",
         });
 
-        return beca.save();
-      }
-    })
-    .then(beca => {
-      debug(beca);
-      return res
-        .header("Location", "/beca/" + beca.nombre)
-        .status(201)
-        .json({
-          nombre: beca.nombre,
-          _id: beca._id
+        res.status(200).json({
+            message: "Insert registration was successful"
         });
     })
-    .catch(err => {
-      next(err);
-    });
-};
+}
 
-module.exports.find = (req, res, next) => {
-  var perPage = Number(req.query.size) || 10,
-    page = req.query.page > 0 ? req.query.page : 0;
+/**
+ * METHOD = PUT
+ * BODY:{
+ *      _id: mongoose.Schema.Types.ObjectId
+ *      carnet:String,
+ *      schedule: String,
+ *      isLate: Boolean,
+ *      datetime: Date
+ * }
+ */
+const update = (req, res)=>{
+    let beca = req.body
+    
+    //console.log(beca._id);
+    
 
-  debug("Lista de Becas", {
-    size: perPage,
-    page,
-    search: req.params.search
-  });
-
-  var filter = {
-    state: {
-      $ne: "draft"
+    if(!beca._id){
+        return res.status(400).json({
+            message: "id is needed",
+        }); 
     }
-  };
 
-  if (!req.listPost) {
-    filter = {
-      ...filter,
-      $or: [
-        {
-          $text: {
-            $search: req.params.search
-          }
-        },
-        {
-          tags: {
-            $regex: `${req.params.search}`
-          }
+    Beca.update({_id: beca._id}, beca)
+        .then(value =>{
+            res.status(200).json({
+                message: "update beca was successful"
+            });
+        })
+        .catch((err)=>{
+            res.status(500).json({
+                message: "Something happend trying to update the beca"
+            });
+        })
+
+}
+
+const deleteById = (req, res)=>{
+    let beca = req.body;
+
+    if(!beca._id){
+        return res.status(400).json({
+            message: "id is needed",
+        }); 
+    }
+
+    Beca.deleteOne({_id:beca._id})
+        .then(deleted=>{
+            res.status(200).json({
+                message: "delete beca was successful"
+            });
+        })
+        .catch(err=>{
+            res.status(500).json({
+                message: "Something happend trying to delete the beca"
+            });
+        })
+}
+
+/**
+ * METHOD = GET
+ */
+const getAll = (req, res)=>{
+    Beca.find((err, becas)=>{
+        if(err) return res.status(500).json({
+            message: "Something happend trying to get the beca",
+        });
+
+        if(becas){
+            res.status(200).json(becas);
+        }else{
+            res.status(404).json({
+                message: "There isn't any becas",
+            });
         }
-      ]
-    };
-  }
-
-  debug("Filter With", filter);
-
-  Post.find()
-    .where(filter)
-    .limit(perPage)
-    .skip(perPage * page)
-    .then(posts => {
-      debug("Count post", posts.length);
-      return res.status(200).json(posts);
-    })
-    .catch(err => {
-      next(err);
     });
-};
+}
 
-module.exports.update = (req, res, next) => {
-  debug("Actualizar beca", req.params.nombre);
+/**
+ * METHOD = GET
+ * Params -> id
+ */
+const getOneById = (req, res)=>{
+    let id = req.params.id; 
 
-  let update = {
-    ...req.body
-  };
+    Beca.findById(id, (err, beca)=>{
+        if(err) return res.status(500).json({
+            message: "Something happend trying to get all becas",
+        });
 
-  Post.findByNombreAndUpdate(req.params.nombre, update)
-    .then(updated => {
-      if (updated) return res.status(200).json(updated);
-      else return res.status(400).json(null);
-    })
-    .catch(err => {
-      next(err);
-    });
-};
+        if(beca){
+            res.status(200).json(beca);
+        }else{
+            res.status(404).json({
+                message: `There is not a beca with id ${id}`,
+            });
+        }
+    });  
+}
 
-module.exports.delete = (req, res, next) => {
-  debug("Borrar beca", req.params.nombre);
-
-  Post.findByNombreAndDelete(req.params.nombre)
-    .then(data => {
-      if (data) res.status(200).json(data);
-      else res.status(404).send();
-    })
-    .catch(err => {
-      next(err);
-    });
-};
+module.exports = {
+    insert,
+    update,
+    deleteById,
+    getAll,
+    getOneById,
+}

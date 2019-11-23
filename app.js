@@ -9,11 +9,13 @@ var sassMiddleware = require('node-sass-middleware');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var becaRouter = require('./routes/beca');
 
 mongoose.connect(process.env.MONGO_URI, {
   useCreateIndex: true,
   useNewUrlParser: true,
-  useUnifiedTopology: true 
+  useUnifiedTopology: true,
+   
   })
   .then(() => {
     debug("success Connected to database")
@@ -43,12 +45,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/:id', becaRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
 });
-
+//static files
+app.use('/public', express.static(path.join(__dirname, 'public')));
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development

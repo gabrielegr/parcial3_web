@@ -1,0 +1,59 @@
+
+
+table {
+    border-radius: 5px !important;
+    border-collapse: collapse !important;
+    border: none !important;
+  }
+  table th,
+  table td {
+    border: none !important
+  }
+  table th:first-child {
+    border-radius: 5px 0 0 0 !important;
+  }
+  table th:last-child {
+    border-radius: 0 5px 0 0 !important;
+  }
+  table tr:last-child td:first-child {
+    border-radius: 0 0 0 5px !important;
+  }
+  table tr:last-child td:last-child {
+    border-radius: 0 0 5px 0 !important;
+  }
+  table tr:hover td {
+    background-color: #ddd !important
+  }
+
+table {
+  width: 75%;
+  vertical-align: center;
+  margin: auto;
+}
+
+th {
+  background-color: limegreen;
+}
+
+main {
+    background-image: url("/public/images/bg.jpg");
+    background-color: #cccccc;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    margin:0px;
+    height:1000px;
+   }
+
+.name{
+    text-align:center;
+}
+header{
+    margin:0px;
+    height:200px;
+    width:100%;
+    background-image: url("/public/images/grads.jpg");
+    background-color: #cccccc;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    
+}
