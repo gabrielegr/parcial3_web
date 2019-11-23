@@ -1,4 +1,4 @@
-const Book = require("../models/BookModel");
+const Beca = require("../models/beca");
 const { body,validationResult } = require("express-validator");
 const { sanitizeBody } = require("express-validator");
 const apiResponse = require("../helpers/apiResponse");
