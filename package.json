@@ -1,0 +1,34 @@
+{
+  "name": "parcial3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon ./bin/www",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gabrielegr/parcial3_web.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gabrielegr/parcial3_web/issues"
+  },
+  "homepage": "https://github.com/gabrielegr/parcial3_web#readme",
+  "dependencies": {
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "ejs": "~2.6.1",
+    "express": "^4.16.1",
+    "http-errors": "~1.6.3",
+    "mongodb": "^3.3.4",
+    "mongoose": "^5.7.12",
+    "morgan": "~1.9.1",
+    "node-sass-middleware": "0.11.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.1"
+  }
+}
