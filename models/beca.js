@@ -9,8 +9,6 @@ var PostSchema = new Schema({
     fundacion:String,
     tipo:String,
     descripcion:String,
-    
-    
 });
 
 module.exports = mongoose.model("Beca", PostSchema);
